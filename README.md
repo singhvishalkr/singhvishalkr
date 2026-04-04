@@ -8,13 +8,17 @@ Senior software developer at **MakeMyTrip**. I ship backend systems in Java—se
 - **Themes**: API design, data access, Elasticsearch-backed search, production hardening (health, migrations, upgrades)
 - **Reality checks**: Major-version Java and Spring moves without breaking what already runs in prod
 
+## Featured
+
+[**Teapot-as-a-Service**](https://github.com/singhvishalkr/teapot-as-a-service) — Production-grade Spring Boot microservice that refuses coffee with enterprise architecture. HTTP 418, RFC 2324 compliant. [DEV April Fools 2026 submission](https://dev.to/singhvishalkr/i-built-a-production-grade-microservice-that-does-absolutely-nothing-8fb).
+
 ## Open source
 
-Roughly **16 PRs across 9 projects**—mostly JVM backends and integration work, not drive-by churn.
+**16+ PRs across 9 projects** — JVM backends, integration work, and cross-stack contributions.
 
 | Project | Focus |
 | --- | --- |
-| Camunda | Workflow engine—Java / Spring, broker and runtime concerns |
+| Camunda | Workflow engine — Java / Spring, broker and runtime concerns |
 | Keycloak | Identity and access management |
 | Airbyte | Data integration / connectors |
 | Kong | API gateway ecosystem |
