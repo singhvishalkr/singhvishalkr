@@ -1,6 +1,6 @@
 # Vishal Kumar Singh
 
-Backend and platform engineer at **MakeMyTrip**, on **Quest2Travel (Q2T)** - B2B corporate travel - **Java 21**, **Spring Boot 4**, **Spring Framework 7**, **Jackson 3**.
+**Senior Software Developer** at **MakeMyTrip**, **Quest2Travel (Q2T)** - B2B corporate travel - **Java 21**, **Spring Boot 4**, **Spring Framework 7**, **Jackson 3**. Scope and expectations align with a **senior IC / SDE-II** track at large product companies: broad ownership, production accountability, and cross-team technical leadership without diluting code quality.
 
 ### At a glance
 
@@ -10,22 +10,41 @@ Backend and platform engineer at **MakeMyTrip**, on **Quest2Travel (Q2T)** - B2B
 | **Product breadth** | **Five** verticals · enterprise booking flows |
 | **Reliability bar** | **99.9%** uptime target on the surfaces we operate |
 
-### Current role
+### Current role (MakeMyTrip / Q2T)
 
-**Product engineering** - REST APIs and flows across the verticals above; callers keep a stable contract.
+**Ownership & delivery**
 
-**Platform engineering** - same repositories, different axis: Spring/JDK/Jackson stack maintenance, scanner-driven dependency cleanup, AWS and GCP secrets behind one configuration path, Datadog APM with Boot actuator probes, RFC 9457-shaped HTTP errors, cookie and redirect hardening, CI time and signal-to-noise.
+- End-to-end ownership of features and platform initiatives: technical design, phased rollout, and validation after release.
+- REST API design and **backward-compatible** evolution across **11** controllers and **80+** endpoints; coordination when consumer teams depend on contracts.
+- Decomposition of large efforts (framework moves, new verticals, cross-cutting policies) into reviewable milestones.
 
-Both streams share one constraint: **external behaviour stays predictable** while internals move.
+**Quality, review, and production discipline**
+
+- Code review and bar-setting for changes that touch shared surfaces; test and regression strategy before production.
+- **SLO-minded operations**: **99.9%** target on owned paths; incident triage, root-cause analysis, and durable fixes (not just hotfixes).
+- Security- and compliance-aware work: auth flows, cookie and redirect behaviour, secret handling, scanner-driven dependency remediation.
+
+**Platform and engineering excellence**
+
+- Spring / JDK / Jackson **stack lifecycle**, RFC **9457**-style HTTP errors, **AWS** and **GCP** secret resolution behind stable interfaces, **Datadog APM** with Boot actuator probes, **CI** reliability and fast feedback.
+- Internal technical communication: clear tradeoffs for product and partner teams; design notes when behaviour crosses team boundaries.
+
+**Collaboration**
+
+- Partnering with product on scope and risk; with QA on edge cases; with platform and infra on deploys, observability, and secrets; escalating and resolving blockers that affect delivery dates.
+
+**Constraint that spans all of the above:** **callers see stable behaviour** while internals and dependencies move.
 
 ### Earlier - Comviva (Tech Mahindra), fintech
 
 | Topic | Detail |
 | --- | --- |
 | Scale | **3.5M+** requests/day · **100+** countries |
-| Modernization | **Java 8 / Spring Boot 2** brought forward to **Java 21 / Spring Boot 3.3** with controlled cutovers |
-| Performance | **Redis** on a latency-critical path (large **p95** gain on measured endpoints) |
-| Architecture | **Kafka** where event boundaries replaced synchronous fan-out |
+| Senior IC scope | Ownership of high-throughput **API gateway** paths; production stability for money-movement and authorization flows; cross-team alignment when changes touched shared contracts |
+| Modernization | **Java 8 / Spring Boot 2** to **Java 21 / Spring Boot 3.3** with **zero-downtime** cutover planning and rollback thinking |
+| Performance engineering | **Redis** on a latency-critical path - large measured **p95** improvement |
+| Architecture | **Kafka** pipeline replacing synchronous fan-out; event-driven boundaries where scale and decoupling required it |
+| Operating model | Measured outcomes (latency, throughput, error budgets) in a regulated fintech environment; same senior-IC expectations on review quality and production accountability |
 
 ### Stack
 
@@ -57,4 +76,4 @@ Tables, links, and PR pointers: **[singhvishalkr/oss-contributions](https://gith
 
 **Contact:** [vishal.kr.singh2021@gmail.com](mailto:vishal.kr.singh2021@gmail.com) · [LinkedIn](https://www.linkedin.com/in/singhvishalkr/) · IST (EU / UK overlap fine)
 
-**Open to:** senior backend / platform roles - India; **NL · DE · IE · UK · SG · SE** where sponsorship fits.
+**Open to:** **Senior Software Developer** and senior IC backend / platform roles - India; **NL · DE · IE · UK · SG · SE** where sponsorship fits.
