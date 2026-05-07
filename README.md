@@ -1,98 +1,117 @@
-﻿# Vishal Kumar Singh
+# Vishal Kumar Singh
 
-Senior software developer at **MakeMyTrip**. I work on the B2B corporate-travel backend **Quest2Travel (Q2T)** in Java 21 and Spring Boot 4: a multi-module BFF, REST surface across several verticals, and the operational work that keeps releases boring for callers (correct HTTP semantics, stable contracts, observable failures).
+Senior Software Developer, **MakeMyTrip**.
 
----
+Backend engineer on **Java 21** and **Spring Boot 4.0** (Spring Framework 7, Jackson 3), shipping the B2B corporate-travel stack **Quest2Travel (Q2T)**: a multi-module BFF, **11 controllers / 80+ REST endpoints**, five verticals, enterprise bookings, **99.9% uptime** on the surfaces we own.
 
-## Current focus
-
-Platform work sits next to product delivery: framework upgrades, secret-manager abstraction, tracing and metrics, security hygiene (cookies, dependency surfaces), and CI time. The recurring goal is the same release shape after each jump: callers keep their contracts; operators get clearer signals.
+Platform migrations and NFRs sit in the same lane as features: framework jumps, secret-manager pluggability, observability, security posture, error contracts, CI hygiene, and releases that keep consumer contracts stable.
 
 ---
 
-## Q2T platform arc (internal refs)
+## Platform arc on Q2T (internal PR refs)
 
-**Framework**
+### Framework
 
-| Cut | Summary |
-| --- | --- |
-| Quarkus 3.7 → Spring Boot 3.5.8 | Spring MVC, SpringDoc OpenAPI, logging and status-code behaviour aligned with expectations; CI runtime improved materially on the pipeline path we owned. `Corp-Q2T-CBackend#520` |
-| Spring Boot 3.5.8 → 4.0.x (Spring Framework 7, Jackson 3) | Modular starters (`webmvc`, `jackson`, `webmvc-test`), Kotlin 2.2.x, SpringDoc 3.0.x, virtual threads, RFC 9457 Problem Details, JDK `HttpClient` where OkHttp left the supported path, JAX-RS bridge removed with Jersey stack out; test suite held green through the cut. `Corp-Q2T-CBackend#604` |
+| Cut | What landed | Evidence |
+| --- | --- | --- |
+| **Quarkus 3.7 → Spring Boot 3.5.8** | Spring MVC, SpringDoc OpenAPI, logging restored, HTTP-status correctness, Wiz transitive fixes; **CI ~20 min → ~8 min** | `Corp-Q2T-CBackend#520` |
+| **Spring Boot 3.5.8 → 4.0.4 + SF7 + Jackson 3** | Modular starters (`webmvc`, `jackson`, `webmvc-test`), Kotlin **2.2.20**, SpringDoc **3.0.2**, virtual threads on, **RFC 9457 Problem Details**, JDK `HttpClient` where OkHttp3 left the stack in SF7, `JaxRsResponseConverter` removed, Jersey stack out; **218 tests** green | `Corp-Q2T-CBackend#604` |
 
-**Cloud and secrets**
+The Boot 4 cut landed net **−587 lines** while adding migration work: Phase 9 alone removed a **124-line** bridge and shed **~15** transitive JARs from the JAX-RS / Jersey path.
 
-| Piece | Idea |
-| --- | --- |
-| GCP Secret Manager behind `ISecretManager` | Same interface as AWS callers already used; provider becomes a deployment concern, not an API fork. `Corp-Q2T-Common#24` (merged) |
-| `gcpConfig.enabled` toggle + reload path | Flip provider per environment without rewriting call sites. `Corp-Q2T-CBackend#632` |
-| AWS Secrets Manager `EnvironmentPostProcessor` in shared starter | Secrets resolve before `@Value` hydration for any Boot app on that starter. `q2t-app-common-revamp#3` |
+### Cloud / secrets
 
-**Observability**
+| Change | What it brings | Evidence |
+| --- | --- | --- |
+| **GCP Secret Manager** module behind `ISecretManager` | Google as a peer to AWS without leaking SDK types at call sites | `Corp-Q2T-Common#24` *(merged)* |
+| **`gcpConfig.enabled` toggle with hot-reload** in CBackend | Flip provider per environment from Consul without redeploy; kill-switch back to AWS | `Corp-Q2T-CBackend#632` *(in flight)* |
+| **AWS Secrets Manager `EnvironmentPostProcessor`** in `q2t-app-common-revamp` | Secrets resolve before any `@Value`; any Boot app on the starter gets the same ordering | `q2t-app-common-revamp#3` |
 
-DataDog APM wired with actuator probes so traces, metrics, and logs line up with runtime health. `Corp-Q2T-CBackend#614` (Q2T-2533).
+### Observability
 
-**Security and dependency posture**
+**DataDog APM** (`Q2T-2533`): first-class traces / metrics / logs alongside Boot 4 actuator probes. `Corp-Q2T-CBackend#614`.
 
-Wiz-driven cleanup on high-severity transitives; cookie handling hardened with Spring `ResponseCookie` (SameSite and redirect flows); JAX-RS / Jersey removals shrink the classpath and remove a long-lived adapter layer. Cross-refs: `#577`, `#601`–`#604`, `#605`–`#613`, `#635`, and related cookie PRs.
+### Security posture (NFR as routine)
 
-**Document Management Service**
+| Theme | Shipped | Evidence |
+| --- | --- | --- |
+| **Wiz CVE clean-up** | High-severity transitives closed (Netty, Commons Lang3, Guava, Kotlin) | `#577`, `#601`, `#603` |
+| **Cookie hardening** | `SameSite=Lax` via Spring `ResponseCookie`; redirection-cookie correctness | `#605` / `#609` / `#611` / `#612` / `#613`, `#635` |
+| **Bridge & dependency removal** | JAX-RS / Jersey JARs out (~**15** transitives gone); smaller artifact, fewer CVE surfaces | `#604` (Phase 9) |
 
-Greenfield BFF in the same org: Maven reactor, `q2t-common-s3` starter (S3 surface + auto-config), presigned upload/download, tenant model (`group` / `corp`), lifecycle states, later phases for audit, scanning, events, search, retention, tags, and a client SDK. PRs span `q2t-app-common-revamp` and `q2t-app-dms` (e.g. Q2T-2555).
+### Document Management Service (Quest2Travel org)
 
-**Recent product-facing work (sampler)**
+BFF bootstrapped end to end:
 
-Cookie redirection, CDRI destination search, approval flows, trip-extension flows, personal-booking nudge, room pax distribution, partner markup rollout; each landed as scoped PRs with the usual review and regression gates.
+- Multi-module Maven reactor, **`q2t-common-s3` Spring Boot starter** (full S3 surface + auto-configuration), DBA-owned DDL, **presigned URL upload/download**, `group=schema + corp=column` model, **PENDING / UPLOADED** lifecycle with `confirm-upload`, structured object keys.
+- Phase 2–3: audit, scan, events, search, expiry, retention, tags, plus a client SDK.
+- PRs: `q2t-app-common-revamp#1`–`#8`, `q2t-app-dms#1`–`#3` (**Q2T-2555**).
+
+### Recent product features (sampler, merged)
+
+Cookie redirection (`#635`) · CDRI destination search (`#621`) · Approval flow (`#587` / `#588`) · Trip extension (travel dates / time / destination) (`#551`–`#574`, `#592` / `#593`) · Personal booking nudge (`#529` / `#538`) · `roomPaxDistribution` (`#607` / `#608`) · Maruti asterisk-mark rollout (`#619`).
 
 ---
 
-## Before MakeMyTrip  -  Comviva (Tech Mahindra), fintech
+## Before MakeMyTrip — Comviva (Tech Mahindra), fintech
 
-High-volume API gateway work across many regions: Java 8 / Spring Boot 2 carried forward to Java 21 / Spring Boot 3.3 with controlled cutovers; Redis on a hot path pulled latency down on measured percentiles; Kafka replaced synchronous fan-out where events were the clearer boundary.
+- **3.5 M+** API requests / day, **100+** countries.
+- **Java 8 / Spring Boot 2 → Java 21 / Spring Boot 3.3** zero-downtime upgrade.
+- **~40%** lower **p95** after a **Redis** hot-path cache on the measured endpoints.
+- **Kafka** event pipeline replacing synchronous fan-out where events were the better boundary.
 
 ---
 
 ## Stack
 
-Java 21 · Spring Boot 4 · Spring Framework 7 · Jackson 3 · Kafka · Redis · PostgreSQL · MongoDB · Elasticsearch · Kubernetes · Docker · AWS (Secrets Manager, ECR, S3) · GCP Secret Manager · Consul · Jenkins · GitHub Actions · Testcontainers · OpenAPI 3 · Datadog · Prometheus · Grafana · Jaeger · JUnit 5 · Mockito
+Java 21 · Spring Boot 4 · Spring Framework 7 · Jackson 3 · Kafka · Redis · PostgreSQL · MongoDB · Elasticsearch · Kubernetes · Docker · **AWS** (Secrets Manager, ECR, S3) · **GCP** (Secret Manager) · Consul · Jenkins · GitHub Actions · Testcontainers · OpenAPI 3 · **Datadog** · Prometheus · Grafana · Jaeger · JUnit 5 · Mockito
 
 ---
 
-## How I prefer to ship
+## How I work
 
-- **RFC-first** for cross-cutting behaviour (error payloads, cookie semantics, retries) so the code change has a short spec to argue with.
-- **Behaviour-preserving migrations** where the external API is the constraint; internal package moves are fair game once tests and contracts say yes.
-- **Thin boundaries at integration points** so cloud providers and HTTP stacks can move without rewriting domain code.
-
----
-
-## Open source
-
-Contributions are spread across JVM infrastructure, CNCF-adjacent docs and tooling, and product docs where accuracy matters for developers integrating the project. Examples include Apache Pulsar (including a broker logging fix carried across release branches), Quarkus guides, Spring Security docs, Camunda Zeebe, Apache Pinot, LlamaIndex, Confluent Parallel Consumer, Kubernetes website, Lima, Linkerd website, Meshery, and sustained documentation work on projects such as Strapi and others in the integration ecosystem.
-
-I keep a curated index in **[singhvishalkr/oss-contributions](https://github.com/singhvishalkr/oss-contributions)** for anyone tracing PR history across repos.
+- **RFC-first** for cross-cutting choices (RFC 9457 errors, cookie semantics, retry policy).
+- **Behaviour-preserving migrations:** framework jumps ship without changing the public API contract for downstream consumers when that is the bar.
+- **Pluggable boundaries:** GCP Secret Manager landed behind the same `ISecretManager` surface AWS already used; flip a flag, no caller rewrite.
+- **Lean diffs:** the Boot 4 migration removed adapter layers and classpath noise while keeping the suite green (figures above).
 
 ---
 
 ## Writing
 
-Technical notes on [Medium](https://medium.com/@vishal.kr.singh), including a long-form walkthrough of Java 21→25 and Spring Boot 3.5→4.0 migration tradeoffs that attracted a wide readership; I treat articles as a place to pin decisions that would otherwise live only in chat logs.
+**7** articles on [Medium](https://medium.com/@vishal.kr.singh). The pinned piece walks **Java 21 → 25** and **Spring Boot 3.5 → 4.0** migration; reach on that order of **12K+ views / 7K+ reads / 290+ claps** (a crude signal of who clicked, not a verdict on depth).
+
+---
+
+## Open source
+
+**100+** author-visible PRs across **25+** projects. Samples that have stable public URLs:
+
+- **Apache Pulsar** — broker log-level fix `#25558` cherry-picked to **4.0 / 4.1 / 4.2** release lines; doc/admin `#25556`; **10** merged on `pulsar-site`.
+- **Quarkus** — `quarkusio/quarkus#53988` merged (OIDC providers guide).
+- **Spring Security** — `#19143` open (CORS Javadoc clarification).
+- **Camunda Zeebe**, **Apache Pinot**, **LlamaIndex** (`#21431` merged, `lgtm`), **Confluent Parallel Consumer**.
+- **CNCF** — `kubernetes/website`, `lima-vm/lima`, `linkerd/website`, `meshery/meshery`.
+- **Docs / product surfaces** — Strapi (Documentation Contribution Program), Directus, Bagisto, Kilo-Org/kilocode, DagsHub, Appwrite, PostHog, Mattermost, Gatsby, Promptfoo.
+
+Full curated index: **[singhvishalkr/oss-contributions](https://github.com/singhvishalkr/oss-contributions)**.
 
 ---
 
 ## Featured repo
 
-[**Teapot-as-a-Service**](https://github.com/singhvishalkr/teapot-as-a-service)  -  Spring Boot microservice that implements HTTP 418 per RFC 2324. [DEV April Fools 2026 write-up](https://dev.to/singhvishalkr/i-built-a-production-grade-microservice-that-does-absolutely-nothing-8fb).
+[**Teapot-as-a-Service**](https://github.com/singhvishalkr/teapot-as-a-service) — Spring Boot microservice that serves HTTP **418** per RFC 2324. [DEV April Fools 2026](https://dev.to/singhvishalkr/i-built-a-production-grade-microservice-that-does-absolutely-nothing-8fb).
 
 ---
 
-## Contact
+## Talk to me
 
 | | |
 | --- | --- |
-| **Open to** | Senior SDE / SDE-II / staff-track roles in NL · DE · IE · UK · SG · SE; strong India roles |
-| **Time zone** | IST (UTC+5:30), overlap-friendly with EU and UK |
+| **Open to** | Senior SDE / SDE-II / staff-track in **NL · DE · IE · UK · SG · SE**; MAANG-tier and similar in **India** |
+| **Time zone** | IST (UTC+5:30), EU / UK-flexible overlap |
 | **Languages** | English (professional), Hindi (native) |
-| **Work authorization** | Indian citizen; open to relocation and visa sponsorship where offered |
+| **Authorization** | Indian citizen; open to relocation and visa sponsorship |
 | **Email** | vishal.kr.singh2021@gmail.com |
 
-**Links:** [LinkedIn](https://www.linkedin.com/in/singhvishalkr/) · [Medium](https://medium.com/@vishal.kr.singh)
+**Links:** [LinkedIn](https://www.linkedin.com/in/singhvishalkr/) · [Medium](https://medium.com/@vishal.kr.singh) · [GitHub](https://github.com/singhvishalkr)
