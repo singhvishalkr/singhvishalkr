@@ -1,79 +1,54 @@
 # Vishal Kumar Singh
 
-**Senior Software Developer** at **MakeMyTrip**, **Quest2Travel (Q2T)** - B2B corporate travel - **Java 21**, **Spring Boot 4**, **Spring Framework 7**, **Jackson 3**. Scope and expectations align with a **senior IC / SDE-II** track at large product companies: broad ownership, production accountability, and cross-team technical leadership without diluting code quality.
+Senior Software Developer at MakeMyTrip, building B2B travel-platform services in Java, Spring Boot, Kafka, Redis, Kubernetes, and PostgreSQL.
 
-### At a glance
+I work on backend systems where stable contracts, observable failures, careful rollouts, and readable code matter as much as feature delivery.
 
-| | |
+## Current Work
+
+- Migrating 6 modules and 80+ REST endpoints from Quarkus 3.7 to Spring Boot 3.5.
+- Owning API design and backward-compatible evolution across 11 controllers.
+- Improving reliability, security, observability, and CI feedback on travel-booking surfaces.
+- Partnering with product, QA, platform, and infra teams when changes cross service and team boundaries.
+
+## Previous Scale
+
+At Comviva (Tech Mahindra), I worked on fintech API gateway paths serving 3.5M+ requests/day across 100+ countries.
+
+- Java 8 / Spring Boot 2 to Java 21 / Spring Boot 3.3 modernization.
+- Kafka pipeline work replacing synchronous fan-out where decoupling mattered.
+- Redis-backed latency improvements on hot read paths.
+- Production fixes around reliability, error handling, and contract stability.
+
+## Open Source
+
+101 merged PRs across backend, infrastructure, docs, and developer-tooling projects.
+
+| Area | Representative work |
 | --- | --- |
-| **API footprint** | Multi-module BFF · **11** controllers · **80+** REST endpoints |
-| **Product breadth** | **Five** verticals · enterprise booking flows |
-| **Reliability bar** | **99.9%** uptime target on the surfaces we operate |
+| JVM / distributed systems | [Apache Pulsar](https://github.com/apache/pulsar-site/pulls?q=is%3Apr+author%3Asinghvishalkr), [Camunda / Zeebe](https://github.com/camunda/camunda/pulls?q=is%3Apr+author%3Asinghvishalkr), [Quarkus](https://github.com/quarkusio/quarkus/pulls?q=is%3Apr+author%3Asinghvishalkr), [Spring Security](https://github.com/spring-projects/spring-security/pulls?q=is%3Apr+author%3Asinghvishalkr), [Testcontainers](https://github.com/testcontainers/testcontainers-java/pulls?q=is%3Apr+author%3Asinghvishalkr), [QuestDB](https://github.com/questdb/questdb/pulls?q=is%3Apr+author%3Asinghvishalkr) |
+| Platform / product engineering | [Strapi](https://github.com/strapi/documentation/pulls?q=is%3Apr+author%3Asinghvishalkr), [Kilo](https://github.com/Kilo-Org/kilocode/pulls?q=is%3Apr+author%3Asinghvishalkr), [Kong](https://github.com/Kong/kongctl/pulls?q=is%3Apr+author%3Asinghvishalkr), [Airbyte](https://github.com/airbytehq/airbyte/pulls?q=is%3Apr+author%3Asinghvishalkr), [Appwrite](https://github.com/appwrite/console/pulls?q=is%3Apr+author%3Asinghvishalkr), [PostHog](https://github.com/PostHog/posthog.com/pulls?q=is%3Apr+author%3Asinghvishalkr) |
+| CNCF / infrastructure docs | [Kubernetes website](https://github.com/kubernetes/website/pulls?q=is%3Apr+author%3Asinghvishalkr), [OpenTelemetry Collector Contrib](https://github.com/open-telemetry/opentelemetry-collector-contrib/pulls?q=is%3Apr+author%3Asinghvishalkr), [Lima](https://github.com/lima-vm/lima/pulls?q=is%3Apr+author%3Asinghvishalkr), [Linkerd website](https://github.com/linkerd/website/pulls?q=is%3Apr+author%3Asinghvishalkr) |
 
-### Current role (MakeMyTrip / Q2T)
+Full contribution index: [singhvishalkr/oss-contributions](https://github.com/singhvishalkr/oss-contributions)
 
-**Ownership & delivery**
+## Writing
 
-- End-to-end ownership of features and platform initiatives: technical design, phased rollout, and validation after release.
-- REST API design and **backward-compatible** evolution across **11** controllers and **80+** endpoints; coordination when consumer teams depend on contracts.
-- Decomposition of large efforts (framework moves, new verticals, cross-cutting policies) into reviewable milestones.
+I write about Java upgrades, Spring Boot, backend performance, and open-source contribution.
 
-**Quality, review, and production discipline**
+- 7 articles on [Medium](https://medium.com/@vishal.kr.singh).
+- Top piece: Java 21 to 25 and Spring Boot 3.5 to 4.0, with roughly 12K+ views, 7K+ reads, and 290+ claps.
 
-- Code review and bar-setting for changes that touch shared surfaces; test and regression strategy before production.
-- **SLO-minded operations**: **99.9%** target on owned paths; incident triage, root-cause analysis, and durable fixes (not just hotfixes).
-- Security- and compliance-aware work: auth flows, cookie and redirect behaviour, secret handling, scanner-driven dependency remediation.
+## Selected Repositories
 
-**Platform and engineering excellence**
+- [event-system](https://github.com/singhvishalkr/event-system) - Spring Boot notification service with per-channel FIFO queues, callbacks, graceful shutdown, Docker, and JUnit coverage.
+- [pr-review-prep](https://github.com/singhvishalkr/pr-review-prep) - PR triage helper that turns a GitHub pull request into deterministic review notes and risk checks.
+- [oss-contributions](https://github.com/singhvishalkr/oss-contributions) - curated index of open-source pull requests and contribution areas.
 
-- Spring / JDK / Jackson **stack lifecycle**, RFC **9457**-style HTTP errors, **AWS** and **GCP** secret resolution behind stable interfaces, **Datadog APM** with Boot actuator probes, **CI** reliability and fast feedback.
-- Internal technical communication: clear tradeoffs for product and partner teams; design notes when behaviour crosses team boundaries.
+## Contact
 
-**Collaboration**
-
-- Partnering with product on scope and risk; with QA on edge cases; with platform and infra on deploys, observability, and secrets; escalating and resolving blockers that affect delivery dates.
-
-**Constraint that spans all of the above:** **callers see stable behaviour** while internals and dependencies move.
-
-### Earlier - Comviva (Tech Mahindra), fintech
-
-| Topic | Detail |
-| --- | --- |
-| Scale | **3.5M+** requests/day · **100+** countries |
-| Senior IC scope | Ownership of high-throughput **API gateway** paths; production stability for money-movement and authorization flows; cross-team alignment when changes touched shared contracts |
-| Modernization | **Java 8 / Spring Boot 2** to **Java 21 / Spring Boot 3.3** with **zero-downtime** cutover planning and rollback thinking |
-| Performance engineering | **Redis** on a latency-critical path - large measured **p95** improvement |
-| Architecture | **Kafka** pipeline replacing synchronous fan-out; event-driven boundaries where scale and decoupling required it |
-| Operating model | Measured outcomes (latency, throughput, error budgets) in a regulated fintech environment; same senior-IC expectations on review quality and production accountability |
-
-### Stack
-
-Java 21 · Spring Boot 4 · Spring Framework 7 · Jackson 3 · Kafka · Redis · PostgreSQL · MongoDB · Elasticsearch · Kubernetes · Docker · AWS (Secrets Manager, ECR, S3) · GCP Secret Manager · Consul · Jenkins · GitHub Actions · Testcontainers · OpenAPI 3 · Datadog · Prometheus · Grafana · Jaeger · JUnit 5 · Mockito
-
-### Open source
-
-**100+** PRs · **25+** repos (cumulative, over several years). Representative:
-
-| Area | Examples |
-| --- | --- |
-| Messaging / JVM | **Apache Pulsar** (#25558 across 4.0 / 4.1 / 4.2; pulsar-site ×10); **Confluent Parallel Consumer**; **Apache Pinot** |
-| Frameworks | **Quarkus** (#53988 merged); **Spring Security** (#19143 open); **Camunda / Zeebe** |
-| Libraries | **LlamaIndex** (#21431 merged) |
-| CNCF / docs | **kubernetes/website**, **lima-vm/lima**, **linkerd/website**, **meshery/meshery** |
-| Product docs / UX | **Strapi**, **Bagisto**, **Kilo-Org/kilocode**, **PostHog**, **Mattermost**, **Appwrite**, **Gatsby**, **Promptfoo**, **DagsHub**, others |
-
-Tables, links, and PR pointers: **[singhvishalkr/oss-contributions](https://github.com/singhvishalkr/oss-contributions)**.
-
-### Writing
-
-**7** articles on [Medium](https://medium.com/@vishal.kr.singh). Pinned piece on **Java 21 to 25** and **Spring Boot 3.5 to 4.0** - roughly **12K+** views / **7K+** reads / **290+** claps (reach, not a quality score).
-
-### Side project
-
-[**Teapot-as-a-Service**](https://github.com/singhvishalkr/teapot-as-a-service) - HTTP **418**, RFC 2324. [DEV write-up](https://dev.to/singhvishalkr/i-built-a-production-grade-microservice-that-does-absolutely-nothing-8fb).
-
----
-
-**Contact:** [vishal.kr.singh2021@gmail.com](mailto:vishal.kr.singh2021@gmail.com) · [LinkedIn](https://www.linkedin.com/in/singhvishalkr/) · IST (EU / UK overlap fine)
-
-**Open to:** **Senior Software Developer** and senior IC backend / platform roles - India; **NL · DE · IE · UK · SG · SE** where sponsorship fits.
+- Email: [vishal.kr.singh2021@gmail.com](mailto:vishal.kr.singh2021@gmail.com)
+- LinkedIn: [linkedin.com/in/singhvishalkr](https://www.linkedin.com/in/singhvishalkr/)
+- Medium: [medium.com/@vishal.kr.singh](https://medium.com/@vishal.kr.singh)
+- Time zone: IST, with EU / UK overlap
+- Open to: senior backend / platform roles in India and visa-sponsored roles in NL, DE, IE, UK, SG, and SE
