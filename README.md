@@ -60,7 +60,8 @@ Seven architect-level guides on Java and Spring Boot platform work, on
 - **[oss-contributions](https://github.com/singhvishalkr/oss-contributions)** — map of every merged upstream PR
 - **[event-system](https://github.com/singhvishalkr/event-system)** — event-driven service, Spring Boot 3 / Java
 - **[e-commerce](https://github.com/singhvishalkr/e-commerce)** — Spring Boot service
-- **[sangeet](https://github.com/singhvishalkr/sangeet)** — Python / FastAPI
+- **[sangeet](https://github.com/singhvishalkr/sangeet)** — local-first FastAPI music automation with SQLite decision traces, Python
+- **[pr-review-prep](https://github.com/singhvishalkr/pr-review-prep)** — turns pull requests into deterministic review notes and risk checks
 
 ### Stack
 
