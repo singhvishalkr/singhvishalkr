@@ -1,54 +1,73 @@
-# Vishal Kumar Singh
+## Vishal Singh
 
-Senior Software Developer at MakeMyTrip, building B2B travel-platform services in Java, Spring Boot, Kafka, Redis, Kubernetes, and PostgreSQL.
+Backend engineer working on high-throughput distributed systems — Java, Spring Boot, Kafka.
+Currently architecting B2B travel platform services at **MakeMyTrip (Quest2Travel)**.
 
-I work on backend systems where stable contracts, observable failures, careful rollouts, and readable code matter as much as feature delivery.
+Most of my work is the unglamorous kind: removing single points of failure, making p95 behave,
+and moving live platforms between major framework versions without taking them down.
 
-## Current Work
+### Open source — 108 merged pull requests
 
-- Migrating 6 modules and 80+ REST endpoints from Quarkus 3.7 to Spring Boot 3.5.
-- Owning API design and backward-compatible evolution across 11 controllers.
-- Improving reliability, security, observability, and CI feedback on travel-booking surfaces.
-- Partnering with product, QA, platform, and infra teams when changes cross service and team boundaries.
+Merged into 45 upstream repositories: **45 code changes and 63 documentation changes** — the
+split is worth stating plainly.
 
-## Previous Scale
+The ones I would point at:
 
-At Comviva (Tech Mahindra), I worked on fintech API gateway paths serving 3.5M+ requests/day across 100+ countries.
+| Project | What I changed |
+|---|---|
+| **[Camunda](https://github.com/camunda/camunda)** (6) | Zeebe broker internals — removed a heap copy from the Raft [snapshot-chunk read path](https://github.com/camunda/camunda/pull/55371), stopped [wrapping broker responses as exceptions](https://github.com/camunda/camunda/pull/55373), added [component health details to the broker health indicator](https://github.com/camunda/camunda/pull/50440), and made [GCS manifest listing retry transient failures](https://github.com/camunda/camunda/pull/55424) |
+| **[Apache Pulsar](https://github.com/apache/pulsar)** | [Lowered a broker log level](https://github.com/apache/pulsar/pull/25558) on a not-found path in `DrainingHashesTracker` |
+| **[HashiCorp Nomad](https://github.com/hashicorp/nomad)** | [Added `-json` and `-t` output](https://github.com/hashicorp/nomad/pull/27991) to `operator autopilot get-config` |
+| **[Flux Flagger](https://github.com/fluxcd/flagger)** | [Run post-rollout hooks when `skipAnalysis` is true](https://github.com/fluxcd/flagger/pull/1918) — progressive-delivery correctness |
+| **[OpenTelemetry Collector](https://github.com/open-telemetry/opentelemetry-collector-contrib)** | [Feature gate for the routing connector's default `error_mode`](https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/48433) |
+| **[Keycloak](https://github.com/keycloak/keycloak)** | [Linked authentication-flow `UsedBy` clients to client settings](https://github.com/keycloak/keycloak/pull/48841) |
+| **[Liquibase](https://github.com/liquibase/liquibase)** | [Treat `'NULL'` as null for MySQL/MariaDB enum column defaults](https://github.com/liquibase/liquibase/pull/7725) |
+| **[Dapr](https://github.com/dapr/cli)** | [`--redis-stack` flag on `dapr init`](https://github.com/dapr/cli/pull/1644) for RediSearch support |
+| **[Mattermost](https://github.com/mattermost/mattermost)** | [Stopped a message body leaking via the Notifications API tag](https://github.com/mattermost/mattermost/pull/36364) |
+| **[Bitwarden](https://github.com/bitwarden/server)** | [Fixed double HTML encoding in emergency-access emails](https://github.com/bitwarden/server/pull/7652) |
+| **[Sinon](https://github.com/sinonjs/sinon)** | [Isolated the `callId` counter per sandbox](https://github.com/sinonjs/sinon/pull/2715) so parallel tests don't interfere |
+| **[Strapi](https://github.com/strapi/strapi)** (5) | Admin and i18n fixes, including [avoiding buffering large uploads for MIME detection](https://github.com/strapi/strapi/pull/26678) |
 
-- Java 8 / Spring Boot 2 to Java 21 / Spring Boot 3.3 modernization.
-- Kafka pipeline work replacing synchronous fan-out where decoupling mattered.
-- Redis-backed latency improvements on hot read paths.
-- Production fixes around reliability, error handling, and contract stability.
+Plus documentation volume: Strapi docs (28), the Apache Pulsar site (9), and Kilo Code (10).
+Full map, every PR linked: **[oss-contributions](https://github.com/singhvishalkr/oss-contributions)**.
 
-## Open Source
+### Day job
 
-101 merged PRs across backend, infrastructure, docs, and developer-tooling projects.
+- Architected a greenfield **Document Management Service** (Java 21, Spring Boot 4) using
+  direct-to-S3 presigned uploads, keeping the application server out of the data path
+- Migrated **6 production modules and 80+ endpoints** from Quarkus 3.7 to Spring Boot 4 with zero
+  downtime, remediating 7 high-severity CVEs
+- Replaced a synchronous fan-out with a **Kafka pipeline across 4 downstream consumers** for 20+
+  fintech operators, holding per-entity ordering
+- Migrated a legacy service from Java 8 / Spring Boot 2 to Java 21 / Spring Boot 3.3 using
+  **OpenRewrite** — code migration in a day, production in a week
+- Built a provider-agnostic **secret-management layer** (hexagonal ports and adapters) over AWS
+  Secrets Manager and GCP Secret Manager with Consul-driven failover and hot reload
 
-| Area | Representative work |
-| --- | --- |
-| JVM / distributed systems | [Apache Pulsar](https://github.com/apache/pulsar-site/pulls?q=is%3Apr+author%3Asinghvishalkr), [Camunda / Zeebe](https://github.com/camunda/camunda/pulls?q=is%3Apr+author%3Asinghvishalkr), [Quarkus](https://github.com/quarkusio/quarkus/pulls?q=is%3Apr+author%3Asinghvishalkr), [Spring Security](https://github.com/spring-projects/spring-security/pulls?q=is%3Apr+author%3Asinghvishalkr), [Testcontainers](https://github.com/testcontainers/testcontainers-java/pulls?q=is%3Apr+author%3Asinghvishalkr), [QuestDB](https://github.com/questdb/questdb/pulls?q=is%3Apr+author%3Asinghvishalkr) |
-| Platform / product engineering | [Strapi](https://github.com/strapi/documentation/pulls?q=is%3Apr+author%3Asinghvishalkr), [Kilo](https://github.com/Kilo-Org/kilocode/pulls?q=is%3Apr+author%3Asinghvishalkr), [Kong](https://github.com/Kong/kongctl/pulls?q=is%3Apr+author%3Asinghvishalkr), [Airbyte](https://github.com/airbytehq/airbyte/pulls?q=is%3Apr+author%3Asinghvishalkr), [Appwrite](https://github.com/appwrite/console/pulls?q=is%3Apr+author%3Asinghvishalkr), [PostHog](https://github.com/PostHog/posthog.com/pulls?q=is%3Apr+author%3Asinghvishalkr) |
-| CNCF / infrastructure docs | [Kubernetes website](https://github.com/kubernetes/website/pulls?q=is%3Apr+author%3Asinghvishalkr), [OpenTelemetry Collector Contrib](https://github.com/open-telemetry/opentelemetry-collector-contrib/pulls?q=is%3Apr+author%3Asinghvishalkr), [Lima](https://github.com/lima-vm/lima/pulls?q=is%3Apr+author%3Asinghvishalkr), [Linkerd website](https://github.com/linkerd/website/pulls?q=is%3Apr+author%3Asinghvishalkr) |
+### Writing
 
-Full contribution index: [singhvishalkr/oss-contributions](https://github.com/singhvishalkr/oss-contributions)
+Seven architect-level guides on Java and Spring Boot platform work, on
+[Medium](https://medium.com/@vishal.kr.singh):
 
-## Writing
+- [Hexagonal Architecture in Spring Boot Microservices: A Practical Guide](https://medium.com/@vishal.kr.singh/hexagonal-architecture-in-spring-boot-microservices-a-practical-guide-with-example-95480050ef08)
+- [Spring Boot Anti-Patterns That Cost You Performance, Scale & Credibility](https://medium.com/@vishal.kr.singh/spring-boot-anti-patterns-that-cost-you-performance-scale-credibility-db23d2e8db8c)
+- [Java 21 → 25 and Spring Boot 3.5 → 4.0: An Architect's Guide to a Safe Platform Upgrade](https://medium.com/@vishal.kr.singh/java-21-25-and-spring-boot-3-5-4-0-an-architects-guide-to-a-safe-platform-upgrade-c0a206d49034)
+- [Spring Boot 4.0 — An Architect's Guide to the Future of Enterprise Java](https://medium.com/@vishal.kr.singh/spring-boot-4-0-an-architects-guide-to-the-future-of-enterprise-java-abd67575f64d)
+- [Modernizing Legacy Microservices: Java 8 & Spring Boot 2 → Java 21 & Spring Boot 3.3](https://medium.com/@vishal.kr.singh/modernizing-legacy-microservices-upgrading-from-java-8-spring-boot-2-to-java-21-spring-boot-3-3-c38a2abe728d)
 
-I write about Java upgrades, Spring Boot, backend performance, and open-source contribution.
+### Mine
 
-- 7 articles on [Medium](https://medium.com/@vishal.kr.singh).
-- Top piece: Java 21 to 25 and Spring Boot 3.5 to 4.0, with roughly 12K+ views, 7K+ reads, and 290+ claps.
+- **[oss-contributions](https://github.com/singhvishalkr/oss-contributions)** — map of every merged upstream PR
+- **[event-system](https://github.com/singhvishalkr/event-system)** — event-driven service, Spring Boot 3 / Java
+- **[e-commerce](https://github.com/singhvishalkr/e-commerce)** — Spring Boot service
+- **[sangeet](https://github.com/singhvishalkr/sangeet)** — Python / FastAPI
 
-## Selected Repositories
+### Stack
 
-- [event-system](https://github.com/singhvishalkr/event-system) - Spring Boot notification service with per-channel FIFO queues, callbacks, graceful shutdown, Docker, and JUnit coverage.
-- [pr-review-prep](https://github.com/singhvishalkr/pr-review-prep) - PR triage helper that turns a GitHub pull request into deterministic review notes and risk checks.
-- [oss-contributions](https://github.com/singhvishalkr/oss-contributions) - curated index of open-source pull requests and contribution areas.
+`Java 21` `Spring Boot 3/4` `Quarkus` `Apache Kafka` `Redis` `PostgreSQL` `MongoDB` `MySQL`
+`Oracle` `AWS` `GCP` `Consul` `Docker` `Maven` `JUnit 5` `Testcontainers` `Micrometer`
+`Prometheus` `Grafana` `ELK` `OpenRewrite`
 
-## Contact
+### Contact
 
-- Email: [vishal.kr.singh2021@gmail.com](mailto:vishal.kr.singh2021@gmail.com)
-- LinkedIn: [linkedin.com/in/singhvishalkr](https://www.linkedin.com/in/singhvishalkr/)
-- Medium: [medium.com/@vishal.kr.singh](https://medium.com/@vishal.kr.singh)
-- Time zone: IST, with EU / UK overlap
-- Open to: senior backend / platform roles in India and visa-sponsored roles in NL, DE, IE, UK, SG, and SE
+[LinkedIn](https://linkedin.com/in/singhvishalkr) · [Medium](https://medium.com/@vishal.kr.singh) · vishal.kr.singh2021@gmail.com
